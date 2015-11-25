@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/background"
+    tools:context="com.example.danielfox.foodchoices.HomePage">
+
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:text="Logout"
+        android:id="@+id/logoutButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:text="New"
+        android:id="@+id/newVisitButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Welcome Daniel"
+        android:id="@+id/welcomeText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_alignBottom="@+id/logoutButton" />
+
+    <SearchView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/search"
+        android:layout_below="@+id/logoutButton"
+        android:background="@color/textEdit"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/filter"
+        android:layout_below="@+id/newVisitButton"
+        android:layout_toEndOf="@+id/search"
+        android:layout_alignEnd="@id/newVisitButton"
+        android:spinnerMode="dropdown"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:layout_alignBottom="@+id/search" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/restaurantList"
+        android:layout_below="@+id/search"
+        android:layout_marginTop="10dp"
+        android:dividerHeight="10dp"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
