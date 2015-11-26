@@ -9,14 +9,12 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
+public class VisitAdapter extends ArrayAdapter<Visit> {
+    private List<Visit> restaurants;
 
-public class ItemAdapter extends ArrayAdapter<Restaurants> {
-
-    private ArrayList<Restaurants> restaurants;
-
-
-    public ItemAdapter(Context context, int textViewResourceId, ArrayList<Restaurants> objects) {
+    public VisitAdapter(Context context, int textViewResourceId, List<Visit> objects) {
         super(context, textViewResourceId, objects);
         this.restaurants = objects;
     }
@@ -25,20 +23,23 @@ public class ItemAdapter extends ArrayAdapter<Restaurants> {
         View v = convertView;
         if (v == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.list_restaurant, null);
+            v = inflater.inflate(R.layout.list_visit, null);
         }
 
-        Restaurants i = restaurants.get(position);
+        Visit i = restaurants.get(position);
 
         if (i != null) {
-            TextView name = (TextView) v.findViewById(R.id.name);
-            RatingBar service = (RatingBar) v.findViewById(R.id.service);
-            float rating = (float) i.getOverallService();
+            TextView date = (TextView) v.findViewById(R.id.visitDate);
+            TextView food = (TextView) v.findViewById(R.id.visitFood);
+            RatingBar visitRating = (RatingBar) v.findViewById(R.id.visitRating);
+            float rating = (float) i.getStars();
 
-            name.setText(i.getRestaurantName() );
-            service.setRating(rating);
+            date.setText(i.getDate());
+            food.setText(i.getFood());
+            visitRating.setRating(rating);
         }
 
         return v;
     }
+
 }

@@ -25,4 +25,20 @@
         android:layout_below="@+id/restaurantHeader"
         android:dividerHeight="10dp"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/backButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:id="@+id/visitEditButton"
+        android:layout_alignBottom="@+id/backButton"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

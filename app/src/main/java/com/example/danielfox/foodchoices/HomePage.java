@@ -95,7 +95,8 @@ public class HomePage extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Restaurants currentRestaurant = (Restaurants) restaurantList.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), RestaurantList.class);
-                intent.putExtra("name", currentRestaurant.getRestaurantName());
+                intent.putExtra("name", username);
+                intent.putExtra("restaurantName", currentRestaurant.getRestaurantName());
                 startActivity(intent);
             }
         });

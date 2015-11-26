@@ -1,12 +1,19 @@
 package com.example.danielfox.foodchoices;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RestaurantList extends Activity {
 
@@ -23,8 +30,11 @@ public class RestaurantList extends Activity {
     }
 
     private void initControls() {
-        restaurantName = getIntent().getExtras().getString("name");
+        restaurantName = getIntent().getExtras().getString("restaurantName");
         TextView header = (TextView) findViewById(R.id.restaurantHeader);
+        List<Visit> restaurantVisits;
+        final ListView visitsList;
+        Button back = (Button) findViewById(R.id.backButton);
         header.setText(restaurantName);
 
         DatabaseHelper database = DatabaseHelper.getInstance(getApplicationContext());
@@ -34,6 +44,30 @@ public class RestaurantList extends Activity {
             e.printStackTrace();
         }
 
+        restaurantVisits = database.getVisits(restaurantName);
+        visitsList = (ListView) findViewById(R.id.allVisits);
+
+        VisitAdapter visitAdapter = new VisitAdapter(this, R.layout.list_visit, restaurantVisits);
+        visitsList.setAdapter(visitAdapter);
+//        visitsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Restaurants currentRestaurant = (Restaurants) visitsList.getItemAtPosition(position);
+//                Intent intent = new Intent(getApplicationContext(), RestaurantList.class);
+//                intent.putExtra("name", currentRestaurant.getRestaurantName());
+//                startActivity(intent);
+//            }
+//        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startNewActivity = new Intent(getApplicationContext(), HomePage.class);
+                startNewActivity.putExtra("name", getIntent().getExtras().getString("name"));
+                startActivity(startNewActivity);
+                finish();
+            }
+        });
 
     }
 
