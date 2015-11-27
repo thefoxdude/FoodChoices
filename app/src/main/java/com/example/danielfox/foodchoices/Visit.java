@@ -11,12 +11,13 @@ public class Visit {
     private double price;
     private int service;
     private String comments;
+    private int selected;
 
     public Visit() {
 
     }
 
-    public Visit(long id, long userID, String restaurant, String food, String date, int stars, double price, int service, String comments) {
+    public Visit(long id, long userID, String restaurant, String food, String date, int stars, double price, int service, String comments, int selected) {
         this.visitID = id;
         this.userID = userID;
         this.restaurant = restaurant;
@@ -26,6 +27,7 @@ public class Visit {
         this.price = price;
         this.service = service;
         this.comments = comments;
+        this.selected = selected;
     }
 
     @Override
@@ -103,5 +105,13 @@ public class Visit {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public int getSelected() {
+        return selected;
+    }
+
+    public void setSelected(int selected) {
+        this.selected = selected;
     }
 }

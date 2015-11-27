@@ -50,7 +50,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "stars INTEGER, " +
                 "price DOUBLE, " +
                 "service INTEGER, " +
-                "comments TEXT);");
+                "comments TEXT, " +
+                "selected INTEGER);");
     }
 
     @Override
@@ -88,6 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Visit createVisit(long userID, String restaurant, String food, String date, int stars, double price, int service, String comments) {
+        int selected = 0;
         ContentValues values = new ContentValues();
         values.put("userID", userID);
         values.put("restaurant", restaurant);
@@ -97,11 +99,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("price", price);
         values.put("service", service);
         values.put("comments", comments);
+        values.put("selected", selected);
 
         long insertId = database.insert("VISIT", null, values);
 
         if (insertId != -1) {
-            return new Visit(insertId, userID, restaurant, food, date, stars, price, service, comments);
+            return new Visit(insertId, userID, restaurant, food, date, stars, price, service, comments, selected);
         }
 
         Log.e(TAG, "Error inserting dat!");
@@ -124,6 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             visit.setPrice(cursor.getDouble(6));
             visit.setService(cursor.getInt(7));
             visit.setComments(cursor.getString(8));
+            visit.setSelected(cursor.getInt(9));
             visits.add(visit);
             cursor.moveToNext();
         }
@@ -147,6 +151,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             visit.setPrice(cursor.getDouble(6));
             visit.setService(cursor.getInt(7));
             visit.setComments(cursor.getString(8));
+            visit.setSelected(cursor.getInt(9));
             visits.add(visit);
             cursor.moveToNext();
         }
@@ -167,6 +172,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         visit.setPrice(cursor.getDouble(6));
         visit.setService(cursor.getInt(7));
         visit.setComments(cursor.getString(8));
+        visit.setSelected(cursor.getInt(9));
         return visit;
     }
 

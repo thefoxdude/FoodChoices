@@ -1,6 +1,8 @@
 package com.example.danielfox.foodchoices;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +21,13 @@ public class RestaurantList extends Activity {
 
     String restaurantName;
     String username;
+    Boolean editOrSave;
+    Button back;
+    Button edit;
+    List<Long> visitIDs;
+    ListView visitsList;
+    DatabaseHelper database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +43,14 @@ public class RestaurantList extends Activity {
         restaurantName = getIntent().getExtras().getString("restaurantName");
         TextView header = (TextView) findViewById(R.id.restaurantHeader);
         List<Visit> restaurantVisits;
-        final ListView visitsList;
-        Button back = (Button) findViewById(R.id.backButton);
+        back = (Button) findViewById(R.id.backButton);
+        edit = (Button) findViewById(R.id.visitEditButton);
         header.setText(restaurantName);
         username = getIntent().getExtras().getString("name");
+        editOrSave = true;
+        visitIDs = new ArrayList<>();
 
-        DatabaseHelper database = DatabaseHelper.getInstance(getApplicationContext());
+        database = DatabaseHelper.getInstance(getApplicationContext());
         try {
             database.open();
         } catch (SQLException e) {
@@ -55,21 +66,72 @@ public class RestaurantList extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Visit currentVisit = (Visit) visitsList.getItemAtPosition(position);
-                Intent intent = new Intent(getApplicationContext(), SelectedVisit.class);
-                intent.putExtra("username", username);
-                intent.putExtra("id", currentVisit.getVisitID());
-                startActivity(intent);
-                onPause();
+                if (editOrSave) {
+                    Intent intent = new Intent(getApplicationContext(), SelectedVisit.class);
+                    intent.putExtra("username", username);
+                    intent.putExtra("id", currentVisit.getVisitID());
+                    startActivity(intent);
+                    onPause();
+                } else {
+                    if (currentVisit.getSelected() == 0) {
+                        visitIDs.add(currentVisit.getVisitID());
+                        currentVisit.setSelected(1);
+
+                    } else {
+                        visitIDs.remove(currentVisit.getVisitID());
+                        currentVisit.setSelected(0);
+                    }
+                }
+            }
+        });
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editOrSave) {
+                    editOrSave = false;
+                    edit.setText("Delete");
+                    back.setText("Cancel");
+                } else {
+                    new AlertDialog.Builder(RestaurantList.this).setTitle("Really Delete?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    editOrSave = true;
+                                    edit.setText("Edit");
+                                    back.setText("Back");
+                                    for (Long deleteVisit : visitIDs) {
+                                        database.deleteVisit(deleteVisit);
+                                    }
+                                    Intent intent = getIntent();
+                                    finish();
+                                    startActivity(intent);
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+
+                }
             }
         });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startNewActivity = new Intent(getApplicationContext(), HomePage.class);
-                startNewActivity.putExtra("name", getIntent().getExtras().getString("name"));
-                startActivity(startNewActivity);
-                finish();
+                if (editOrSave) {
+                    Intent startNewActivity = new Intent(getApplicationContext(), HomePage.class);
+                    startNewActivity.putExtra("name", getIntent().getExtras().getString("name"));
+                    startActivity(startNewActivity);
+                    finish();
+                } else {
+                    editOrSave = true;
+                    edit.setText("Edit");
+                    back.setText("Back");
+                }
             }
         });
 

@@ -35,7 +35,7 @@ public class ItemAdapter extends ArrayAdapter<Restaurants> {
             RatingBar service = (RatingBar) v.findViewById(R.id.service);
             float rating = (float) i.getOverallService();
 
-            name.setText(i.getRestaurantName() );
+            name.setText(i.getRestaurantName());
             service.setRating(rating);
         }
 
