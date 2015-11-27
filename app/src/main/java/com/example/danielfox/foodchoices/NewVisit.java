@@ -3,15 +3,12 @@ package com.example.danielfox.foodchoices;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 
 import java.sql.SQLException;
-import java.util.Random;
 
 public class NewVisit extends Activity {
 
@@ -43,8 +40,8 @@ public class NewVisit extends Activity {
     }
 
     public void initControls() {
-        cancel = (Button) (findViewById(R.id.cancelButton));
-        save = (Button) (findViewById(R.id.saveButton));
+        cancel = (Button) (findViewById(R.id.selectedVisitBack));
+        save = (Button) (findViewById(R.id.selectedVisitEdit));
         database = DatabaseHelper.getInstance(this);
         try {
             database.open();
@@ -64,17 +61,17 @@ public class NewVisit extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                restaurantInput = (EditText) (findViewById(R.id.restaurantName));
+                restaurantInput = (EditText) (findViewById(R.id.visitRestaurantName));
                 restaurant = restaurantInput.getText().toString();
-                foodInput = (EditText) (findViewById(R.id.foodEaten));
+                foodInput = (EditText) (findViewById(R.id.visitFoodEaten));
                 food = foodInput.getText().toString();
-                dateInput = (EditText) (findViewById(R.id.date));
+                dateInput = (EditText) (findViewById(R.id.visitDate));
                 date = dateInput.getText().toString();
-                overallRating = (RatingBar) (findViewById(R.id.overallRating));
+                overallRating = (RatingBar) (findViewById(R.id.visitOverallRating));
                 overall = (int) overallRating.getRating();
-                priceInput = (EditText) (findViewById(R.id.price));
+                priceInput = (EditText) (findViewById(R.id.visitPrice));
                 price = Double.parseDouble(priceInput.getText().toString());
-                serviceRating = (RatingBar) (findViewById(R.id.serviceRating));
+                serviceRating = (RatingBar) (findViewById(R.id.visitServiceRating));
                 service = (int) serviceRating.getRating();
                 commentsInput = (EditText) (findViewById(R.id.comments));
                 comments = commentsInput.getText().toString();

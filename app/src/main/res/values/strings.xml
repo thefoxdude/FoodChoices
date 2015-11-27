@@ -6,4 +6,5 @@
     <string name="title_activity_home_page">HomePage</string>
     <string name="title_activity_new_visit">NewVisit</string>
     <string name="title_activity_restaurant_list">RestaurantList</string>
+    <string name="title_activity_selected_visit">SelectedVisit</string>
 </resources>

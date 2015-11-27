@@ -49,15 +49,15 @@ public class RestaurantList extends Activity {
 
         VisitAdapter visitAdapter = new VisitAdapter(this, R.layout.list_visit, restaurantVisits);
         visitsList.setAdapter(visitAdapter);
-//        visitsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Restaurants currentRestaurant = (Restaurants) visitsList.getItemAtPosition(position);
-//                Intent intent = new Intent(getApplicationContext(), RestaurantList.class);
-//                intent.putExtra("name", currentRestaurant.getRestaurantName());
-//                startActivity(intent);
-//            }
-//        });
+        visitsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Visit currentVisit = (Visit) visitsList.getItemAtPosition(position);
+                Intent intent = new Intent(getApplicationContext(), SelectedVisit.class);
+                intent.putExtra("id", currentVisit.getVisitID());
+                startActivity(intent);
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

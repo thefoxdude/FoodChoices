@@ -154,5 +154,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return visits;
     }
 
+    public Visit getSelectedVisit(Long visitID) {
+        Visit visit = new Visit();
+        Cursor cursor = database.rawQuery("select * from VISIT where visitID = " + visitID, null);
+        cursor.moveToFirst();
+        visit.setVisitID(cursor.getLong(0));
+        visit.setUserID(cursor.getLong(1));
+        visit.setRestaurant(cursor.getString(2));
+        visit.setFood(cursor.getString(3));
+        visit.setDate(cursor.getString(4));
+        visit.setStars(cursor.getInt(5));
+        visit.setPrice(cursor.getDouble(6));
+        visit.setService(cursor.getInt(7));
+        visit.setComments(cursor.getString(8));
+        return visit;
+    }
+
 
 }

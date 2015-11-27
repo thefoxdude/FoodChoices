@@ -28,6 +28,10 @@
             android:name=".RestaurantList"
             android:label="@string/title_activity_restaurant_list" >
         </activity>
+        <activity
+            android:name=".SelectedVisit"
+            android:label="@string/title_activity_selected_visit" >
+        </activity>
     </application>
 
 </manifest>
