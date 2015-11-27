@@ -26,6 +26,7 @@ public class SelectedVisit extends Activity {
     Long visitID;
     Visit currentVisit;
     DatabaseHelper database;
+    Boolean editOrSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class SelectedVisit extends Activity {
         price.setText(String.valueOf(currentVisit.getPrice()));
         service.setRating(currentVisit.getService());
         comments.setText(currentVisit.getComments());
+        editOrSave = true;
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -68,13 +70,29 @@ public class SelectedVisit extends Activity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                restaurantName.setEnabled(true);
-                foodEaten.setEnabled(true);
-                date.setEnabled(true);
-                rating.setIsIndicator(false);
-                price.setEnabled(true);
-                service.setIsIndicator(false);
-                comments.setEnabled(true);
+                if (editOrSave) {
+                    restaurantName.setEnabled(true);
+                    foodEaten.setEnabled(true);
+                    date.setEnabled(true);
+                    rating.setIsIndicator(false);
+                    price.setEnabled(true);
+                    service.setIsIndicator(false);
+                    comments.setEnabled(true);
+                    edit.setText("Save");
+                    editOrSave = false;
+                }
+                else {
+                    restaurantName.setEnabled(false);
+                    foodEaten.setEnabled(false);
+                    date.setEnabled(false);
+                    rating.setIsIndicator(true);
+                    price.setEnabled(false);
+                    service.setIsIndicator(true);
+                    comments.setEnabled(false);
+                    edit.setText("Edit");
+                    editOrSave = true;
+                    // Save to database
+                }
             }
         });
     }

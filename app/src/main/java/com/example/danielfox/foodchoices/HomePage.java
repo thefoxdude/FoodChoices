@@ -48,7 +48,6 @@ public class HomePage extends Activity {
         welcome.setText("Welcome " + username);
         filters.add("Name");
         filters.add("Stars");
-        filters.add("Visits");
         ArrayAdapter<String> filterAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, filters);
         filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         filter.setAdapter(filterAdapter);
