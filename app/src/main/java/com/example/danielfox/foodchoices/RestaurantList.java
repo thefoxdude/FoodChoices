@@ -18,6 +18,7 @@ import java.util.List;
 public class RestaurantList extends Activity {
 
     String restaurantName;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class RestaurantList extends Activity {
         final ListView visitsList;
         Button back = (Button) findViewById(R.id.backButton);
         header.setText(restaurantName);
+        username = getIntent().getExtras().getString("name");
 
         DatabaseHelper database = DatabaseHelper.getInstance(getApplicationContext());
         try {
@@ -54,8 +56,10 @@ public class RestaurantList extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Visit currentVisit = (Visit) visitsList.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), SelectedVisit.class);
+                intent.putExtra("username", username);
                 intent.putExtra("id", currentVisit.getVisitID());
                 startActivity(intent);
+                onPause();
             }
         });
 
