@@ -3,6 +3,7 @@ package com.example.danielfox.foodchoices;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,9 @@ public class SelectedVisit extends Activity {
     TextView price;
     RatingBar service;
     TextView comments;
+    Long visitID;
+    Visit currentVisit;
+    DatabaseHelper database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,17 @@ public class SelectedVisit extends Activity {
         service = (RatingBar) findViewById(R.id.visitServiceRating);
         comments = (TextView) findViewById(R.id.visitComments);
         username = getIntent().getExtras().getString("username");
+        visitID = getIntent().getExtras().getLong("id");
+        database = DatabaseHelper.getInstance(getApplicationContext());
+        currentVisit = database.getSelectedVisit(visitID);
+        restaurantName.setText(currentVisit.getRestaurant());
+        foodEaten.setText(currentVisit.getFood());
+        date.setText(currentVisit.getDate());
+        rating.setRating(currentVisit.getStars());
+        price.setText(String.valueOf(currentVisit.getPrice()));
+        service.setRating(currentVisit.getService());
+        comments.setText(currentVisit.getComments());
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
