@@ -59,7 +59,7 @@
         android:paddingLeft="5dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Login"
         android:id="@+id/loginButton"
@@ -68,6 +68,16 @@
         android:layout_marginTop="50dp"
         android:textColor="@color/text"
         android:textSize="20dp"
-        android:layout_alignStart="@+id/loginInstruction" />
+        android:layout_alignStart="center" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:id="@+id/signUpButton"
+        android:textColor="@color/text"
+        android:textSize="20dp"
+        android:layout_alignTop="@+id/loginButton"
+        android:layout_alignStart="@+id/password" />
 
 </RelativeLayout>

@@ -32,6 +32,10 @@
             android:name=".SelectedVisit"
             android:label="@string/title_activity_selected_visit" >
         </activity>
+        <activity
+            android:name=".SignUp"
+            android:label="@string/title_activity_sign_up" >
+        </activity>
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@ import static com.example.danielfox.foodchoices.Functions.checkLogin;
 
 public class LoginActivity extends Activity {
 
-    Button login;
+    Button login, signUp;
     EditText usernameInput, passwordInput;
     String username, password;
 
@@ -28,6 +28,7 @@ public class LoginActivity extends Activity {
 
     public void initControls() {
         login = (Button) findViewById(R.id.loginButton);
+        signUp = (Button) findViewById(R.id.signUpButton);
         usernameInput = (EditText) findViewById(R.id.username);
         username = usernameInput.getText().toString();
         passwordInput = (EditText) findViewById(R.id.password);
@@ -45,6 +46,14 @@ public class LoginActivity extends Activity {
                 else {
                     Toast.makeText(getApplicationContext(), "Incorrect Login", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startNewActivity = new Intent(getApplicationContext(), SignUp.class);
+                startActivity(startNewActivity);
             }
         });
     }

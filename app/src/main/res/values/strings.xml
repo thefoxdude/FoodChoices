@@ -7,4 +7,5 @@
     <string name="title_activity_new_visit">NewVisit</string>
     <string name="title_activity_restaurant_list">RestaurantList</string>
     <string name="title_activity_selected_visit">SelectedVisit</string>
+    <string name="title_activity_sign_up">SignUp</string>
 </resources>

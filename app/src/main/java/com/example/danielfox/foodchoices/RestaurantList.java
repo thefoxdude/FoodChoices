@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -76,10 +77,11 @@ public class RestaurantList extends Activity {
                     if (currentVisit.getSelected() == 0) {
                         visitIDs.add(currentVisit.getVisitID());
                         currentVisit.setSelected(1);
-
+                        parent.getChildAt(position).setBackgroundColor(Color.rgb(0, 153, 76));
                     } else {
                         visitIDs.remove(currentVisit.getVisitID());
                         currentVisit.setSelected(0);
+                        parent.getChildAt(position).setBackgroundColor(getResources().getColor(R.color.background));
                     }
                 }
             }
@@ -131,6 +133,10 @@ public class RestaurantList extends Activity {
                     editOrSave = true;
                     edit.setText("Edit");
                     back.setText("Back");
+                    visitIDs = new ArrayList<>();
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
                 }
             }
         });
