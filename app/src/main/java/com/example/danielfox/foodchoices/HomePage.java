@@ -23,11 +23,13 @@ public class HomePage extends Activity {
     TextView welcome;
     SearchView search;
     Spinner filter;
+    Long userID;
     String username;
     List<String> filters = new ArrayList<>();
     ListView restaurantList;
     DatabaseHelper database;
     List<Visit> allRestaurants;
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,20 +45,21 @@ public class HomePage extends Activity {
         search = (SearchView) (findViewById(R.id.search));
         filter = (Spinner) (findViewById(R.id.filter));
         database = DatabaseHelper.getInstance(this);
-        username = getIntent().getExtras().getString("name");
+        userID = getIntent().getExtras().getLong("id");
         welcome = (TextView) (findViewById(R.id.welcomeText));
-        welcome.setText("Welcome " + username);
         filters.add("Name");
         filters.add("Stars");
         ArrayAdapter<String> filterAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, filters);
         filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         filter.setAdapter(filterAdapter);
-        DatabaseHelper database = DatabaseHelper.getInstance(getApplicationContext());
         try {
             database.open();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        currentUser = database.findUser(userID);
+        username = currentUser.getFirstName();
+        welcome.setText("Welcome " + username);
         ArrayList<Restaurants> listOfRestaurants = new ArrayList<>();
 
         logout.setOnClickListener(new View.OnClickListener() {

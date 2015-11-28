@@ -39,6 +39,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase database) {
         database.execSQL("CREATE TABLE IF NOT EXISTS USER(" +
                 "userID INTEGER PRIMARY KEY, " +
+                "firstName TEXT, " +
+                "lastName TEXT, " +
                 "username TEXT, " +
                 "password TEXT);");
         database.execSQL("CREATE TABLE IF NOT EXISTS VISIT(" +
@@ -67,21 +69,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         database.delete("USER", "userID = " + id, null);
     }
 
-    public User createUser(String username, String password) {
+    public User createUser(String firstName, String lastName, String username, String password) {
         ContentValues values = new ContentValues();
+        values.put("firstName", firstName);
+        values.put("lastName", lastName);
         values.put("username", username);
         values.put("password", password);
-
-
 
         long insertId = database.insert("USER", null, values);
 
         if (insertId != -1) {
-            return new User(insertId, username, password);
+            return new User(insertId,firstName, lastName, username, password);
         }
 
         Log.e(TAG, "Error inserting data!");
         return null;
+    }
+
+    public User findUser(String username, String password) {
+        User currentUser = new User();
+        Cursor cursor = database.rawQuery("select * from USER WHERE username ='" + username + "' AND password = '" + password + "'", null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            currentUser.setUserID(cursor.getLong(0));
+            currentUser.setFirstName(cursor.getString(1));
+            currentUser.setLastName(cursor.getString(2));
+            currentUser.setPassword(cursor.getString(3));
+            cursor.moveToNext();
+        }
+        return currentUser;
+    }
+
+    public User findUser(Long userID) {
+        User currentUser = new User();
+        Cursor cursor = database.rawQuery("select * from USER WHERE userID = " + userID, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            currentUser.setUserID(cursor.getLong(0));
+            currentUser.setFirstName(cursor.getString(1));
+            currentUser.setLastName(cursor.getString(2));
+            currentUser.setPassword(cursor.getString(3));
+            cursor.moveToNext();
+        }
+        return currentUser;
     }
 
     public void deleteVisit (long id) {

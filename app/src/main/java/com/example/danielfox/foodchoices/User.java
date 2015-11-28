@@ -4,6 +4,8 @@ package com.example.danielfox.foodchoices;
 public class User {
 
     private long userID;
+    private String firstName;
+    private String lastName;
     private String username;
     private String password;
 
@@ -11,8 +13,10 @@ public class User {
 
     }
 
-    public User(long id, String username, String password) {
+    public User(long id, String firstName, String lastName, String username, String password) {
         this.userID = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
     }
@@ -20,6 +24,22 @@ public class User {
     @Override
     public String toString() {
         return username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public long getUserID() {

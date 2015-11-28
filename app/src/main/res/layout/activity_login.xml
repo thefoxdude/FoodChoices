@@ -67,8 +67,7 @@
         android:layout_alignEnd="@+id/password"
         android:layout_marginTop="50dp"
         android:textColor="@color/text"
-        android:textSize="20dp"
-        android:layout_alignStart="center" />
+        android:textSize="20dp" />
 
     <Button
         android:layout_width="wrap_content"
