@@ -22,6 +22,7 @@ public class RestaurantList extends Activity {
 
     String restaurantName;
     String username;
+    Long userID;
     Boolean editOrSave;
     Button back;
     Button edit;
@@ -48,6 +49,7 @@ public class RestaurantList extends Activity {
         edit = (Button) findViewById(R.id.visitEditButton);
         header.setText(restaurantName);
         username = getIntent().getExtras().getString("name");
+        userID = getIntent().getExtras().getLong("userID");
         editOrSave = true;
         visitIDs = new ArrayList<>();
 
@@ -70,6 +72,7 @@ public class RestaurantList extends Activity {
                 if (editOrSave) {
                     Intent intent = new Intent(getApplicationContext(), SelectedVisit.class);
                     intent.putExtra("username", username);
+                    intent.putExtra("userID", userID);
                     intent.putExtra("id", currentVisit.getVisitID());
                     startActivity(intent);
                     onPause();
@@ -127,6 +130,7 @@ public class RestaurantList extends Activity {
                 if (editOrSave) {
                     Intent startNewActivity = new Intent(getApplicationContext(), HomePage.class);
                     startNewActivity.putExtra("name", getIntent().getExtras().getString("name"));
+                    startNewActivity.putExtra("userID", getIntent().getExtras().getLong("userID"));
                     startActivity(startNewActivity);
                     finish();
                 } else {

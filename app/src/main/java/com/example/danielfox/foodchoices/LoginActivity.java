@@ -45,7 +45,7 @@ public class LoginActivity extends Activity {
                 password = passwordInput.getText().toString();
                 currentUser = database.findUser(username, password);
                 if (currentUser.getFirstName() != null) {
-                    startNewActivity.putExtra("id", currentUser.getUserID());
+                    startNewActivity.putExtra("userID", currentUser.getUserID());
                     startActivity(startNewActivity);
                     finish();
                 } else {

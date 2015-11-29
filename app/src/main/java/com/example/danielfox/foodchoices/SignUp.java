@@ -58,7 +58,7 @@ public class SignUp extends Activity {
                                     password.getText().toString());
                 Intent startNewActivity = new Intent(getApplicationContext(), HomePage.class);
                 newUser = database.findUser(username.getText().toString(), password.getText().toString());
-                startNewActivity.putExtra("id", newUser.getUserID());
+                startNewActivity.putExtra("userID", newUser.getUserID());
                 startActivity(startNewActivity);
                 finish();
             }

@@ -14,7 +14,7 @@ public class NewVisit extends Activity {
 
     Button cancel;
     Button save;
-    Long userID = 1L;
+    Long userID;
     EditText restaurantInput;
     String restaurant;
     EditText foodInput;
@@ -43,6 +43,7 @@ public class NewVisit extends Activity {
         cancel = (Button) (findViewById(R.id.selectedVisitBack));
         save = (Button) (findViewById(R.id.selectedVisitEdit));
         database = DatabaseHelper.getInstance(this);
+        userID = getIntent().getExtras().getLong("userID");
         try {
             database.open();
         } catch (SQLException e) {
@@ -78,6 +79,7 @@ public class NewVisit extends Activity {
                 database.createVisit(userID, restaurant, food, date, overall, price, service, comments);
                 Intent startNewActivity = new Intent(getApplicationContext(), HomePage.class);
                 startNewActivity.putExtra("name", getIntent().getExtras().getString("name"));
+                startNewActivity.putExtra("userID", userID);
                 startActivity(startNewActivity);
                 finish();
             }

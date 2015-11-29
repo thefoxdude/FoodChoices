@@ -141,10 +141,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public List<Visit> getAllVisits() {
+    public List<Visit> getAllVisits(Long userID) {
         List<Visit> visits = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select * from VISIT", null);
+        Cursor cursor = database.rawQuery("select * from VISIT WHERE userID = '" + userID + "'", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Visit visit = new Visit();

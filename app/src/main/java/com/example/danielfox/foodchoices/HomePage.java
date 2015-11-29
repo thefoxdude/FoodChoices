@@ -30,6 +30,7 @@ public class HomePage extends Activity {
     DatabaseHelper database;
     List<Visit> allRestaurants;
     User currentUser;
+    Integer numOfRestaurants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class HomePage extends Activity {
         search = (SearchView) (findViewById(R.id.search));
         filter = (Spinner) (findViewById(R.id.filter));
         database = DatabaseHelper.getInstance(this);
-        userID = getIntent().getExtras().getLong("id");
+        userID = getIntent().getExtras().getLong("userID");
         welcome = (TextView) (findViewById(R.id.welcomeText));
         filters.add("Name");
         filters.add("Stars");
@@ -60,7 +61,8 @@ public class HomePage extends Activity {
         currentUser = database.findUser(userID);
         username = currentUser.getFirstName();
         welcome.setText("Welcome " + username);
-        ArrayList<Restaurants> listOfRestaurants = new ArrayList<>();
+        numOfRestaurants = 0;
+
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,17 +78,33 @@ public class HomePage extends Activity {
             public void onClick(View v) {
                 Intent startNewActivity = new Intent(getApplicationContext(), NewVisit.class);
                 startNewActivity.putExtra("name", username);
+                startNewActivity.putExtra("userID", userID);
                 startActivity(startNewActivity);
                 finish();
             }
         });
 
+        ArrayList<Restaurants> listOfRestaurants = new ArrayList<>();
         restaurantList = (ListView) (findViewById(R.id.restaurantList));
-        allRestaurants = database.getAllVisits();
+        allRestaurants = database.getAllVisits(userID);
         for (Visit currentRestaurant: allRestaurants) {
             Long id = currentRestaurant.getVisitID();
             String name = currentRestaurant.getRestaurant();
             Integer rating = currentRestaurant.getStars();
+            Boolean same = false;
+            numOfRestaurants++;
+            if (numOfRestaurants > 1) {
+                for (Restaurants checkRestaurant : listOfRestaurants) {
+                    if (name.equals(checkRestaurant.getRestaurantName())) {
+                        checkRestaurant.setOverallService((rating + checkRestaurant.getOverallService()) / 2);
+                        same = true;
+                        break;
+                    }
+                }
+            }
+            if (same) {
+                continue;
+            }
             listOfRestaurants.add(new Restaurants(id, name, rating));
         }
 
@@ -98,6 +116,7 @@ public class HomePage extends Activity {
                 Restaurants currentRestaurant = (Restaurants) restaurantList.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), RestaurantList.class);
                 intent.putExtra("name", username);
+                intent.putExtra("userID", userID);
                 intent.putExtra("restaurantName", currentRestaurant.getRestaurantName());
                 startActivity(intent);
             }
