@@ -71,11 +71,10 @@ public class RestaurantList extends Activity {
                 Visit currentVisit = (Visit) visitsList.getItemAtPosition(position);
                 if (editOrSave) {
                     Intent intent = new Intent(getApplicationContext(), SelectedVisit.class);
-                    intent.putExtra("username", username);
                     intent.putExtra("userID", userID);
                     intent.putExtra("id", currentVisit.getVisitID());
                     startActivity(intent);
-                    onPause();
+                    finish();
                 } else {
                     if (currentVisit.getSelected() == 0) {
                         visitIDs.add(currentVisit.getVisitID());

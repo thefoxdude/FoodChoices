@@ -54,6 +54,7 @@ public class NewVisit extends Activity {
             public void onClick(View v) {
                 Intent startNewActivity = new Intent(getApplicationContext(), HomePage.class);
                 startNewActivity.putExtra("name", getIntent().getExtras().getString("name"));
+                startNewActivity.putExtra("userID", getIntent().getExtras().getLong("userID"));
                 startActivity(startNewActivity);
                 finish();
             }

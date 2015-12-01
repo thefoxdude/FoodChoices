@@ -11,9 +11,10 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.sql.SQLException;
+
 public class SelectedVisit extends Activity {
 
-    String username;
     Button back;
     Button edit;
     TextView restaurantName;
@@ -24,6 +25,7 @@ public class SelectedVisit extends Activity {
     RatingBar service;
     TextView comments;
     Long visitID;
+    Long userID;
     Visit currentVisit;
     DatabaseHelper database;
     Boolean editOrSave;
@@ -46,8 +48,8 @@ public class SelectedVisit extends Activity {
         price = (TextView) findViewById(R.id.visitPrice);
         service = (RatingBar) findViewById(R.id.visitServiceRating);
         comments = (TextView) findViewById(R.id.visitComments);
-        username = getIntent().getExtras().getString("username");
         visitID = getIntent().getExtras().getLong("id");
+        userID = getIntent().getExtras().getLong("userID");
         database = DatabaseHelper.getInstance(getApplicationContext());
         currentVisit = database.getSelectedVisit(visitID);
         restaurantName.setText(currentVisit.getRestaurant());
@@ -59,11 +61,35 @@ public class SelectedVisit extends Activity {
         comments.setText(currentVisit.getComments());
         editOrSave = true;
 
+        try {
+            database.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (editOrSave) {
+                    Intent startNewActivity = new Intent(getApplicationContext(), RestaurantList.class);
+                    startNewActivity.putExtra("userID", userID);
+                    startNewActivity.putExtra("id", visitID);
+                    startNewActivity.putExtra("restaurant", restaurantName.toString());
+                    finish();
+                }
+                else {
+                    restaurantName.setEnabled(false);
+                    foodEaten.setEnabled(false);
+                    date.setEnabled(false);
+                    rating.setIsIndicator(true);
+                    price.setEnabled(false);
+                    service.setIsIndicator(true);
+                    comments.setEnabled(false);
+                    back.setText("Back");
+                    edit.setText("Edit");
+                    editOrSave = true;
+                }
             }
         });
 
@@ -78,6 +104,7 @@ public class SelectedVisit extends Activity {
                     price.setEnabled(true);
                     service.setIsIndicator(false);
                     comments.setEnabled(true);
+                    back.setText("Cancel");
                     edit.setText("Save");
                     editOrSave = false;
                 }
@@ -89,9 +116,18 @@ public class SelectedVisit extends Activity {
                     price.setEnabled(false);
                     service.setIsIndicator(true);
                     comments.setEnabled(false);
+                    back.setText("Back");
                     edit.setText("Edit");
                     editOrSave = true;
                     // Save to database
+                    database.deleteVisit(visitID);
+                    database.createVisit(userID, restaurantName.getText().toString(),
+                            foodEaten.getText().toString(),
+                            date.getText().toString(),
+                            (int) rating.getRating(),
+                            Double.parseDouble(price.getText().toString()),
+                            (int) service.getRating(),
+                            comments.getText().toString());
                 }
             }
         });
