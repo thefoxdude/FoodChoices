@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class HomePage extends Activity {
@@ -21,11 +23,11 @@ public class HomePage extends Activity {
     Button logout;
     Button newVisit;
     TextView welcome;
-    SearchView search;
-    Spinner filter;
+//    SearchView search;
+//    Spinner filter;
     Long userID;
     String username;
-    List<String> filters = new ArrayList<>();
+//    List<String> filters = new ArrayList<>();
     ListView restaurantList;
     DatabaseHelper database;
     List<Visit> allRestaurants;
@@ -43,16 +45,16 @@ public class HomePage extends Activity {
     private void initControls() {
         logout = (Button) (findViewById(R.id.logoutButton));
         newVisit = (Button) (findViewById(R.id.newVisitButton));
-        search = (SearchView) (findViewById(R.id.search));
-        filter = (Spinner) (findViewById(R.id.filter));
+//        search = (SearchView) (findViewById(R.id.search));
+//        filter = (Spinner) (findViewById(R.id.filter));
         database = DatabaseHelper.getInstance(this);
         userID = getIntent().getExtras().getLong("userID");
         welcome = (TextView) (findViewById(R.id.welcomeText));
-        filters.add("Name");
-        filters.add("Stars");
-        ArrayAdapter<String> filterAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, filters);
-        filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        filter.setAdapter(filterAdapter);
+//        filters.add("Name");
+//        filters.add("Stars");
+//        ArrayAdapter<String> filterAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, filters);
+//        filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        filter.setAdapter(filterAdapter);
         try {
             database.open();
         } catch (SQLException e) {
@@ -107,6 +109,12 @@ public class HomePage extends Activity {
             listOfRestaurants.add(new Restaurants(id, name, rating));
         }
 
+        Collections.sort(listOfRestaurants, new Comparator<Restaurants>() {
+            @Override
+            public int compare(Restaurants lhs, Restaurants rhs) {
+                return lhs.getRestaurantName().compareToIgnoreCase(rhs.getRestaurantName());
+            }
+        });
         ItemAdapter restaurantsAdapter = new ItemAdapter(this, R.layout.list_restaurant, listOfRestaurants);
         restaurantList.setAdapter(restaurantsAdapter);
         restaurantList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

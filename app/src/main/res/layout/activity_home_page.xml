@@ -36,31 +36,31 @@
         android:textSize="20dp"
         android:layout_alignBottom="@+id/logoutButton" />
 
-    <SearchView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/search"
-        android:layout_below="@+id/logoutButton"
-        android:background="@color/textEdit"
-        android:layout_alignParentStart="true" />
+    <!--<SearchView-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/search"-->
+        <!--android:layout_below="@+id/logoutButton"-->
+        <!--android:background="@color/textEdit"-->
+        <!--android:layout_alignParentStart="true" />-->
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/filter"
-        android:layout_below="@+id/newVisitButton"
-        android:layout_toEndOf="@+id/search"
-        android:layout_alignEnd="@id/newVisitButton"
-        android:spinnerMode="dropdown"
-        android:background="#ffffff"
-        android:gravity="center"
-        android:layout_alignBottom="@+id/search" />
+    <!--<Spinner-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/filter"-->
+        <!--android:layout_below="@+id/newVisitButton"-->
+        <!--android:layout_toEndOf="@+id/search"-->
+        <!--android:layout_alignEnd="@id/newVisitButton"-->
+        <!--android:spinnerMode="dropdown"-->
+        <!--android:background="#ffffff"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_alignBottom="@+id/search" />-->
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/restaurantList"
-        android:layout_below="@+id/search"
+        android:layout_below="@+id/welcomeText"
         android:layout_marginTop="10dp"
         android:dividerHeight="10dp"
         android:layout_alignParentStart="true" />
