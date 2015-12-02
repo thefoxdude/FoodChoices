@@ -77,7 +77,6 @@ public class HomePage extends Activity {
             @Override
             public void onClick(View v) {
                 Intent startNewActivity = new Intent(getApplicationContext(), NewVisit.class);
-                startNewActivity.putExtra("name", username);
                 startNewActivity.putExtra("userID", userID);
                 startActivity(startNewActivity);
                 finish();
@@ -115,10 +114,10 @@ public class HomePage extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Restaurants currentRestaurant = (Restaurants) restaurantList.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), RestaurantList.class);
-                intent.putExtra("name", username);
                 intent.putExtra("userID", userID);
                 intent.putExtra("restaurantName", currentRestaurant.getRestaurantName());
                 startActivity(intent);
+                finish();
             }
         });
 

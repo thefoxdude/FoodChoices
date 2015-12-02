@@ -74,8 +74,8 @@ public class SelectedVisit extends Activity {
                 if (editOrSave) {
                     Intent startNewActivity = new Intent(getApplicationContext(), RestaurantList.class);
                     startNewActivity.putExtra("userID", userID);
-                    startNewActivity.putExtra("id", visitID);
-                    startNewActivity.putExtra("restaurant", restaurantName.toString());
+                    startNewActivity.putExtra("restaurantName", restaurantName.getText().toString());
+                    startActivity(startNewActivity);
                     finish();
                 }
                 else {

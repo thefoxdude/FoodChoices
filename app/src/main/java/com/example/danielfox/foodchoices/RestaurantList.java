@@ -21,7 +21,6 @@ import java.util.List;
 public class RestaurantList extends Activity {
 
     String restaurantName;
-    String username;
     Long userID;
     Boolean editOrSave;
     Button back;
@@ -48,7 +47,6 @@ public class RestaurantList extends Activity {
         back = (Button) findViewById(R.id.backButton);
         edit = (Button) findViewById(R.id.visitEditButton);
         header.setText(restaurantName);
-        username = getIntent().getExtras().getString("name");
         userID = getIntent().getExtras().getLong("userID");
         editOrSave = true;
         visitIDs = new ArrayList<>();
@@ -60,7 +58,7 @@ public class RestaurantList extends Activity {
             e.printStackTrace();
         }
 
-        restaurantVisits = database.getVisits(restaurantName);
+        restaurantVisits = database.getVisits(restaurantName, userID);
         visitsList = (ListView) findViewById(R.id.allVisits);
 
         VisitAdapter visitAdapter = new VisitAdapter(this, R.layout.list_visit, restaurantVisits);

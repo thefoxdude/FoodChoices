@@ -53,8 +53,7 @@ public class NewVisit extends Activity {
             @Override
             public void onClick(View v) {
                 Intent startNewActivity = new Intent(getApplicationContext(), HomePage.class);
-                startNewActivity.putExtra("name", getIntent().getExtras().getString("name"));
-                startNewActivity.putExtra("userID", getIntent().getExtras().getLong("userID"));
+                startNewActivity.putExtra("userID", userID);
                 startActivity(startNewActivity);
                 finish();
             }
@@ -79,7 +78,6 @@ public class NewVisit extends Activity {
                 comments = commentsInput.getText().toString();
                 database.createVisit(userID, restaurant, food, date, overall, price, service, comments);
                 Intent startNewActivity = new Intent(getApplicationContext(), HomePage.class);
-                startNewActivity.putExtra("name", getIntent().getExtras().getString("name"));
                 startNewActivity.putExtra("userID", userID);
                 startActivity(startNewActivity);
                 finish();

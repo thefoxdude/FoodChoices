@@ -166,9 +166,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return visits;
     }
 
-    public List<Visit> getVisits(String restaurantName) {
+    public List<Visit> getVisits(String restaurantName, Long userID) {
         List<Visit> visits = new ArrayList<>();
-        Cursor cursor = database.rawQuery("select * from VISIT where restaurant='" + restaurantName + "'", null);
+        Cursor cursor = database.rawQuery("select * from VISIT where restaurant='" + restaurantName + "' AND userID = '" + userID + "'", null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()) {
             Visit visit = new Visit();
