@@ -34,21 +34,22 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:id="@+id/username"
         android:layout_below="@+id/loginInstruction"
         android:layout_alignStart="@+id/Welcome"
         android:layout_marginTop="25dp"
         android:textColor="@color/text"
         android:layout_alignEnd="@+id/Welcome"
-        android:background="@color/textEdit"
+        android:background="@drawable/white_background"
+        android:padding="10dp"
         android:hint="Username"
         android:text="thefoxdude"
         android:paddingLeft="5dp" />
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/password"
@@ -57,7 +58,8 @@
         android:layout_alignEnd="@+id/username"
         android:hint="Password"
         android:text="password"
-        android:background="@color/textEdit"
+        android:background="@drawable/white_background"
+        android:padding="10dp"
         android:paddingLeft="5dp" />
 
     <Button
@@ -68,16 +70,18 @@
         android:layout_below="@+id/password"
         android:layout_alignEnd="@+id/password"
         android:layout_marginTop="50dp"
-        android:textColor="@color/text"
+        android:textColor="#ffffff"
+        android:background="@drawable/black_background"
         android:textSize="20dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Sign Up"
         android:id="@+id/signUpButton"
-        android:textColor="@color/text"
+        android:textColor="#ffffff"
         android:textSize="20dp"
+        android:background="@drawable/black_background"
         android:layout_alignTop="@+id/loginButton"
         android:layout_alignStart="@+id/password" />
 

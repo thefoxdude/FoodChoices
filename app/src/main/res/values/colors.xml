@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#a3ff8f</color>
-    <color name="text">#553400</color>
-    <color name="button">#ffdeaa</color>
-    <color name="textEdit">#e2ffd3</color>
+    <color name="background">#D92200</color>
+    <color name="text">#000000</color>
+    <color name="textEdit">#ffffff</color>
+    <color name="buttonText">#ffffff</color>
 </resources>

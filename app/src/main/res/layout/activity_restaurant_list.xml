@@ -31,6 +31,8 @@
         android:layout_height="wrap_content"
         android:text="Back"
         android:id="@+id/backButton"
+        android:background="@drawable/black_background"
+        android:textColor="@color/buttonText"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
@@ -40,5 +42,7 @@
         android:text="Edit"
         android:id="@+id/visitEditButton"
         android:layout_alignBottom="@+id/backButton"
+        android:background="@drawable/black_background"
+        android:textColor="@color/buttonText"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>

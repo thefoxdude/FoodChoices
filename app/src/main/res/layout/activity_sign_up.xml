@@ -23,6 +23,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/firstNameField"
         android:layout_below="@+id/signUpHeader"
+        android:background="@drawable/white_background"
+        android:padding="10dp"
         android:layout_alignParentStart="true"
         android:layout_marginTop="50dp"
         android:hint="First Name"
@@ -36,6 +38,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
         android:hint="Last Name"
+        android:background="@drawable/white_background"
+        android:padding="10dp"
         android:layout_alignParentEnd="true" />
 
     <EditText
@@ -46,6 +50,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
         android:hint="Username"
+        android:background="@drawable/white_background"
+        android:padding="10dp"
         android:layout_alignParentEnd="true" />
 
     <EditText
@@ -58,6 +64,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
         android:hint="Password"
+        android:background="@drawable/white_background"
+        android:padding="10dp"
         android:layout_alignParentEnd="true" />
 
     <EditText
@@ -70,6 +78,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
         android:hint="Confirm Password"
+        android:background="@drawable/white_background"
+        android:padding="10dp"
         android:layout_alignParentEnd="true" />
 
     <Button
@@ -79,6 +89,8 @@
         android:id="@+id/signUpConfirm"
         android:layout_below="@+id/passwordConfirmField"
         android:layout_alignParentEnd="true"
+        android:background="@drawable/black_background"
+        android:textColor="@color/buttonText"
         android:layout_marginTop="30dp" />
 
     <Button
@@ -87,5 +99,7 @@
         android:text="Cancel"
         android:id="@+id/signUpCancel"
         android:layout_alignTop="@+id/signUpConfirm"
+        android:background="@drawable/black_background"
+        android:textColor="@color/buttonText"
         android:layout_alignParentStart="true" />
 </RelativeLayout>

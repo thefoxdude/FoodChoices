@@ -12,6 +12,8 @@
         android:layout_height="50dp"
         android:text="Cancel"
         android:id="@+id/selectedVisitBack"
+        android:background="@drawable/black_background"
+        android:textColor="@color/buttonText"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
@@ -20,6 +22,8 @@
         android:layout_height="50dp"
         android:text="save"
         android:id="@+id/selectedVisitEdit"
+        android:background="@drawable/black_background"
+        android:textColor="@color/buttonText"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
@@ -37,10 +41,10 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="10dp"
-        android:padding="5dp"
-        android:background="@color/textEdit"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:background="@drawable/white_background"
         android:id="@+id/visitRestaurantName"
         android:layout_below="@+id/selectedVisitBack"
         android:layout_alignParentStart="true"
@@ -49,10 +53,10 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/textEdit"
-        android:padding="5dp"
+        android:padding="10dp"
+        android:background="@drawable/white_background"
         android:id="@+id/visitFoodEaten"
         android:layout_below="@+id/visitRestaurantName"
         android:layout_alignParentStart="true"
@@ -61,10 +65,10 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/textEdit"
-        android:padding="5dp"
+        android:padding="10dp"
+        android:background="@drawable/white_background"
         android:inputType="date"
         android:ems="10"
         android:id="@+id/visitDate"
@@ -95,10 +99,10 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/textEdit"
-        android:padding="5dp"
+        android:padding="10dp"
+        android:background="@drawable/white_background"
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/visitPrice"
@@ -130,10 +134,10 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/textEdit"
-        android:padding="5dp"
+        android:padding="10dp"
+        android:background="@drawable/white_background"
         android:id="@+id/comments"
         android:hint="Comments"
         android:layout_below="@+id/visitServiceRating"
