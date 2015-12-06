@@ -44,7 +44,6 @@
         android:background="@drawable/white_background"
         android:padding="10dp"
         android:hint="Username"
-        android:text="thefoxdude"
         android:paddingLeft="5dp" />
 
     <EditText
@@ -57,7 +56,6 @@
         android:layout_alignStart="@+id/username"
         android:layout_alignEnd="@+id/username"
         android:hint="Password"
-        android:text="password"
         android:background="@drawable/white_background"
         android:padding="10dp"
         android:paddingLeft="5dp" />
