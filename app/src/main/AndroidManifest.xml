@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.danielfox.foodchoices" >
+    package="danielfox.foodchoices" >
 
     <application
         android:allowBackup="true"
@@ -36,6 +36,16 @@
             android:name=".SignUp"
             android:label="@string/title_activity_sign_up" >
         </activity>
+
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="i2wR3LXuch5nbg7C9ZVL0vMmeOyzOow0WQVeNenY" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="l5SPBPBWkOP4svO2iAuMEFnn7O71smWa88YRVYlc" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>
